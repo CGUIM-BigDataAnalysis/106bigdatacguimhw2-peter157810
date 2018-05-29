@@ -1,0 +1,173 @@
+"0","library(readr)"
+"0","library(dplyr)"
+"0","library(knitr)"
+"0","library(ggplot2)"
+"0","library(choroplethr)"
+"0","library(choroplethrMaps)"
+"0","c103<-read_csv(""http://stats.moe.gov.tw/files/detail/103/103_ab103_C.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¬w§O = col_character(),
+  °ê§O = col_character(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í` = col_integer(),
+  `¾Ç¦ì¥Í-¹´¥Í(§t´ä¿D)` = col_integer(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì³°¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°ê¥æ´«¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j³°¬ã­×¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-®ü«C¯Z` = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","c104<-read_csv(""http://stats.moe.gov.tw/files/detail/104/104_ab104_C.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¬w§O = col_character(),
+  °ê§O = col_character(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í` = col_integer(),
+  `¾Ç¦ì¥Í-¹´¥Í(§t´ä¿D)` = col_integer(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì³°¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°ê¥æ´«¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j³°¬ã­×¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-®ü«C¯Z` = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","c105<-read_csv(""http://stats.moe.gov.tw/files/detail/105/105_ab105_C.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¬w§O = col_character(),
+  °ê§O = col_character(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í = col_integer(),
+  `¾Ç¦ì¥Í_¹´¥Í(§t´ä¿D)` = col_integer(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì³°¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°ê¥æ´«¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª = col_integer(),
+  «D¾Ç¦ì¥Í_¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¤j³°¬ã­×¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_®ü«C¯Z = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","c106<-read_csv(""http://stats.moe.gov.tw/files/detail/106/106_ab105_C.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¬w§O = col_character(),
+  °ê§O = col_character(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í = col_integer(),
+  `¾Ç¦ì¥Í_¹´¥Í(§t´ä¿D)` = col_integer(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì³°¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°ê¥æ´«¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª = col_integer(),
+  «D¾Ç¦ì¥Í_¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¤j³°¬ã­×¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_®ü«C¯Z = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","s103<-read_csv(""http://stats.moe.gov.tw/files/detail/103/103_ab103_S.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¾Ç®ÕÃþ«¬ = col_character(),
+  ¾Ç®Õ¥N½X = col_character(),
+  ¾Ç®Õ¦WºÙ = col_character(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í` = col_integer(),
+  `¾Ç¦ì¥Í-¹´¥Í(§t´ä¿D)` = col_integer(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì³°¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°ê¥æ´«¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j³°¬ã­×¥Í` = col_character(),
+  `«D¾Ç¦ì¥Í-®ü«C¯Z` = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","s104<-read_csv(""http://stats.moe.gov.tw/files/detail/104/104_ab104_S.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¾Ç®ÕÃþ«¬ = col_character(),
+  ¾Ç®Õ¥N½X = col_character(),
+  ¾Ç®Õ¦WºÙ = col_character(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í` = col_integer(),
+  `¾Ç¦ì¥Í-¹´¥Í(§t´ä¿D)` = col_integer(),
+  `¾Ç¦ì¥Í-¥¿¦¡­×Åª¾Ç¦ì³°¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°ê¥æ´«¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í` = col_integer(),
+  `«D¾Ç¦ì¥Í-¤j³°¬ã­×¥Í` = col_character(),
+  `«D¾Ç¦ì¥Í-®ü«C¯Z` = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","s105<-read_csv(""http://stats.moe.gov.tw/files/detail/105/105_ab105_S.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¾Ç®ÕÃþ«¬ = col_character(),
+  ¾Ç®Õ¥N½X = col_character(),
+  ¾Ç®Õ¦WºÙ = col_character(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í = col_integer(),
+  `¾Ç¦ì¥Í_¹´¥Í(§t´ä¿D)` = col_integer(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì³°¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°ê¥æ´«¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª = col_integer(),
+  «D¾Ç¦ì¥Í_¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¤j³°¬ã­×¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_®ü«C¯Z = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","s106<-read_csv(""http://stats.moe.gov.tw/files/detail/106/106_ab105_S.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¾Ç®ÕÃþ«¬ = col_character(),
+  ¾Ç®Õ¥N½X = col_character(),
+  ¾Ç®Õ¦WºÙ = col_character(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì¥~°ê¥Í = col_integer(),
+  `¾Ç¦ì¥Í_¹´¥Í(§t´ä¿D)` = col_integer(),
+  ¾Ç¦ì¥Í_¥¿¦¡­×Åª¾Ç¦ì³°¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°ê¥æ´«¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¥~°êµu´Á¬ã²ß¤Î­Ó¤H¿ïÅª = col_integer(),
+  «D¾Ç¦ì¥Í_¤j±Mªþ³]µØ»y¤å¤¤¤ß¾Ç¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_¤j³°¬ã­×¥Í = col_integer(),
+  «D¾Ç¦ì¥Í_®ü«C¯Z = col_integer(),
+  ¹Ò¥~±M¯Z = col_integer()
+)
+"
+"0","odsresult<-read_csv(""Student_RPT_07.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¾Ç¦~«× = col_integer(),
+  ¾Ç´Á = col_integer(),
+  ³]¥ß§O = col_character(),
+  ¾Ç®ÕÃþ§O = col_character(),
+  ¾Ç®Õ¥N½X = col_character(),
+  ¾Ç®Õ¦WºÙ = col_character(),
+  ¨t©Ò¥N½X = col_integer(),
+  ¨t©Ò¦WºÙ = col_character(),
+  ¾Ç¨î = col_character(),
+  `¹ï¤è¾Ç®Õ(¾÷ºc)°ê§O(¦a°Ï)` = col_character(),
+  `¹ï¤è¾Ç®Õ(¾÷ºc)¤¤¤å¦WºÙ` = col_character(),
+  `¹ï¤è¾Ç®Õ(¾÷ºc)­^¤å¦WºÙ` = col_character(),
+  ¤p­p = col_integer(),
+  ¨k = col_integer(),
+  ¤k = col_integer()
+)
+"
+"2","2 parsing failures.
+row [38;5;246m# A tibble: 2 x 5[39m col     row col      expected               actual file                 expected   [3m[38;5;246m<int>[39m[23m [3m[38;5;246m<chr>[39m[23m    [3m[38;5;246m<chr>[39m[23m                  [3m[38;5;246m<chr>[39m[23m  [3m[38;5;246m<chr>[39m[23m                actual [38;5;250m1[39m [4m2[24m[4m3[24m579 ¨t©Ò¥N½X no trailing characters A2     'Student_RPT_07.csv' file [38;5;250m2[39m [4m3[24m[4m4[24m284 ¨t©Ò¥N½X no trailing characters A2     'Student_RPT_07.csv'
+"
+"0","world<-read_csv(""https://ws.moe.edu.tw/Download.ashx?u=C099358C81D4876CC7586B178A6BD6D5062C39FB76BDE7EC7685C1A3C0846BCDD2B4F4C2FE907C3E7E96F97D24487065577A728C59D4D9A4ECDFF432EA5A114C8B01E4AFECC637696DE4DAECA03BB417&n=4E402A02CE6F0B6C1B3C7E89FDA1FAD0B5DDFA6F3DA74E2DA06AE927F09433CFBC07A1910C169A1845D8EB78BD7D60D7414F74617F2A6B71DC86D17C9DA3781394EF5794EEA7363C&icon=..csv"")"
+"2","Missing column names filled in: 'X4' [4], 'X5' [5], 'X6' [6]"
+"2","Parsed with column specification:
+cols(
+  ¬w§O = col_character(),
+  °ê§O = col_character(),
+  Á`¤H¼Æ = col_number(),
+  X4 = col_character(),
+  X5 = col_character(),
+  X6 = col_character()
+)
+"

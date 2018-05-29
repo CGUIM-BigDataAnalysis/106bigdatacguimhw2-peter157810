@@ -1,7 +1,7 @@
 ---
 title: "106-2 大數據分析方法 作業二"
 output: github_document
-author: Yi-Ju Tseng
+author: 林伯鴻
 ---
 
 作業完整說明[連結](https://docs.google.com/document/d/1aLGSsGXhgOVgwzSg9JdaNz2qGPQJSoupDAQownkGf_I/edit?usp=sharing)
@@ -13,31 +13,137 @@ author: Yi-Ju Tseng
 ## 來台境外生分析
 ### 資料匯入與處理
 ```{r dataloadToTWN}
-#這是R Code Chunk
+library(readr)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(choroplethr)
+library(choroplethrMaps)
+c103<-read_csv("http://stats.moe.gov.tw/files/detail/103/103_ab103_C.csv")
+c104<-read_csv("http://stats.moe.gov.tw/files/detail/104/104_ab104_C.csv")
+c105<-read_csv("http://stats.moe.gov.tw/files/detail/105/105_ab105_C.csv")
+c106<-read_csv("http://stats.moe.gov.tw/files/detail/106/106_ab105_C.csv")
+s103<-read_csv("http://stats.moe.gov.tw/files/detail/103/103_ab103_S.csv")
+s104<-read_csv("http://stats.moe.gov.tw/files/detail/104/104_ab104_S.csv")
+s105<-read_csv("http://stats.moe.gov.tw/files/detail/105/105_ab105_S.csv")
+s106<-read_csv("http://stats.moe.gov.tw/files/detail/106/106_ab105_S.csv")
+odsresult<-read_csv("Student_RPT_07.csv")
+world<-read_csv("https://ws.moe.edu.tw/Download.ashx?u=C099358C81D4876CC7586B178A6BD6D5062C39FB76BDE7EC7685C1A3C0846BCDD2B4F4C2FE907C3E7E96F97D24487065577A728C59D4D9A4ECDFF432EA5A114C8B01E4AFECC637696DE4DAECA03BB417&n=4E402A02CE6F0B6C1B3C7E89FDA1FAD0B5DDFA6F3DA74E2DA06AE927F09433CFBC07A1910C169A1845D8EB78BD7D60D7414F74617F2A6B71DC86D17C9DA3781394EF5794EEA7363C&icon=..csv")
 ```
 
 ### 哪些國家來台灣唸書的學生最多呢？ 
 ```{r ToTWNCountry}
-#這是R Code Chunk
-head(iris)
-knitr::kable(head(iris))
-library(knitr)
-kable(head(iris))
+total_c103<-
+  c103%>%
+  mutate(總人數=rowSums(c103[,3:11]))%>%
+  select(國別,總人數)
+colnames(total_c103)=c("國別","總人數103")
+
+total_c104<-
+  c104%>%
+  mutate(總人數=rowSums(c104[,3:11]))%>%
+  select(國別,總人數)
+colnames(total_c104)=c("國別","總人數104")
+
+total_c105<-
+  c105%>%
+  mutate(總人數=rowSums(c105[,3:11]))%>%
+  select(國別,總人數)
+colnames(total_c105)=c("國別","總人數105")
+
+total_c106<-
+  c106%>%
+  mutate(總人數=rowSums(c106[,3:11]))%>%
+  select(國別,總人數)
+colnames(total_c106)=c("國別","總人數106")
+
+total_c<-merge(total_c103,total_c104,
+               by="國別")
+total_c<-merge(total_c,total_c105,
+               by="國別")
+total_c<-merge(total_c,total_c106,
+               by="國別")
+  result_c<-
+  total_c%>%
+  mutate(總人數=rowSums(total_c[,2:5],na.rm=T))%>%
+  select(國別,總人數)%>%
+  arrange(desc(總人數))
+kable(head(result_c,10))
 ```
 
 ### 哪間大學的境外生最多呢？
 ```{r ToTWNUniversity}
-#這是R Code Chunk
+total_s103<-
+  s103%>%
+  mutate(總人數=rowSums(s103[,c(4:9,11,12)]))%>%
+  select(學校名稱,總人數)
+colnames(total_s103)=c("學校名稱","總人數103")
+
+total_s104<-
+  s104%>%
+  mutate(總人數=rowSums(s104[,c(4:9,11,12)]))%>%
+  select(學校名稱,總人數)
+colnames(total_s104)=c("學校名稱","總人數104")
+
+total_s105<-
+  s105%>%
+  mutate(總人數=rowSums(s105[,c(4:9,11,12)]))%>%
+  select(學校名稱,總人數)
+colnames(total_s105)=c("學校名稱","總人數105")
+
+total_s106<-
+  s106%>%
+  mutate(總人數=rowSums(s106[,c(4:9,11,12)]))%>%
+  select(學校名稱,總人數)
+colnames(total_s106)=c("學校名稱","總人數106")
+
+total_s<-merge(total_s103,total_s104,
+               by="學校名稱")
+total_s<-merge(total_s,total_s105,
+               by="學校名稱")
+total_s<-merge(total_s,total_s106,
+               by="學校名稱")
+
+  result_s<-
+  total_s%>%
+  mutate(總人數=rowSums(total_s[,2:5],na.rm=T))%>%
+  select(學校名稱,總人數)%>%
+  arrange(desc(總人數))
+kable(head(result_s,10))
 ```
 
 ### 各個國家來台灣唸書的學生人數條狀圖
 ```{r ToTWNCountryBar}
-#這是R Code Chunk
+result2<-result_c
+chart1<-
+  ggplot(data=result2,
+         aes(x=國別,y=總人數))+
+  geom_bar(stat = "identity")
+chart1
 ```
 
 ### 各個國家來台灣唸書的學生人數面量圖
 ```{r ToTWNCountryMap}
-#這是R Code Chunk
+countryname<-read_csv("CountriesComparisionTable.csv")
+result3<-merge(result_c,countryname,by.x="國別",by.y="Taiwan")
+colnames(result3)<-c("國別","value","ISO3","region")
+###中國大陸=中國大陸(5)+香港(91)+澳門(159)
+grep("中國大陸",result3$國別)
+grep("香港",result3$國別)
+grep("澳門",result3$國別)
+result3[5,2]=result3[5,2]+result3[91,2]+result3[159,2]
+###索馬利亞民主共和國=索馬利亞民主共和國+索馬利蘭共和國
+grep("索馬利亞民主共和國",result3$國別)
+grep("索馬利蘭共和國",result3$國別)
+result3[107,2]=result3[107,2]+result3[108,2]
+result3<-
+  result3%>%
+  subset(region!="Unmatch")%>%
+  subset(`國別`!="索馬利蘭共和國")%>%
+  select(region,value)
+chart2<-
+  country_choropleth(result3)
+chart2
 ```
 
 ## 台灣學生國際交流分析
@@ -49,22 +155,51 @@ kable(head(iris))
 
 ### 台灣大專院校的學生最喜歡去哪些國家進修交流呢？
 ```{r FromTWNCountry}
-#這是R Code Chunk
+result4_1<-
+  odsresult%>%
+  subset(`學年度`>=103)%>%
+  group_by(`對方學校(機構)國別(地區)`)%>%
+  summarise(count=sum(小計))%>%
+  arrange(desc(count))
+kable(head(result4_1,10))
 ```
 
 ### 哪間大學的出國交流學生數最多呢？
 ```{r FromTWNUniversity}
-#這是R Code Chunk
+result4_2<-
+  odsresult%>%
+  subset(`學年度`>=103)%>%
+  group_by(學校名稱)%>%
+  summarise(count=sum(小計))%>%
+  arrange(desc(count))
+kable(head(result4_2,10))
 ```
 
 ### 台灣大專院校的學生最喜歡去哪些國家進修交流條狀圖
 ```{r FromTWNCountryBar}
-#這是R Code Chunk
+result5<-result4_1
+chart3<-
+  ggplot(data=result5,
+         aes(x=`對方學校(機構)國別(地區)`,y=count))+
+  geom_bar(stat = "identity")
+chart3
 ```
 
 ### 台灣大專院校的學生最喜歡去哪些國家進修交流面量圖
 ```{r FromTWNCountryMap}
-#這是R Code Chunk
+countryname<-read_csv("CountriesComparisionTable.csv")
+result4<-result4_1
+colnames(result4)<-c("國名","count")
+result6<-merge(result4,countryname,
+               by.x="國名",by.y="Taiwan")
+
+colnames(result6)<-c("國名","value","ISO3","region")
+result6<-
+  result6%>%
+  subset(region!="Unmatch")
+chart4<-
+  country_choropleth(result6,num_colors=9)
+chart4
 ```
 
 ## 台灣學生出國留學分析
@@ -76,12 +211,23 @@ kable(head(iris))
 
 ### 台灣學生最喜歡去哪些國家留學呢？
 ```{r FromTWNAb}
-#這是R Code Chunk
+result7<-
+  world%>%
+  select(洲別:總人數)%>%
+  arrange(desc(總人數))
+kable(head(result7,10))
 ```
 
 ### 台灣學生最喜歡去哪些國家留學面量圖
 ```{r FromTWNAbMap}
-#這是R Code Chunk
+countryname<-read_csv("CountriesComparisionTable.csv")
+result7[13,2]<-"南韓"
+result8<-merge(result7,countryname,
+               by.x="國別",by.y="Taiwan")
+colnames(result8)<-c("國別","洲別","value","ISO3","region")
+chart5<-
+  country_choropleth(result8,num_colors=7)
+chart5
 ```
 
 ## 綜合分析
